@@ -1,0 +1,20 @@
+# Disabled until the first tag is cut: remove the `if: false` below to enable.
+# Publishing uses PyPI trusted publishing, so no API token is stored here.
+name: Publish
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    if: false
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - run: uv build
+      - run: uv publish --trusted-publishing always

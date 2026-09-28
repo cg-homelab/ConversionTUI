@@ -1,0 +1,96 @@
+/* Three panes of equal weight, each with its own border title, lazygit style. */
+
+Screen {
+    background: $surface;
+}
+
+#panes {
+    height: 1fr;
+}
+
+#tree, #files, #queue {
+    border: round $primary-darken-2;
+    width: 1fr;
+    /* DataTable sizes to its content, so pin the panes to the row height —
+       otherwise a short file list leaves the pane border floating mid-screen. */
+    height: 100%;
+    padding: 0 1;
+}
+
+#tree {
+    width: 22%;
+    min-width: 18;
+}
+
+#files {
+    width: 38%;
+}
+
+#queue {
+    width: 40%;
+}
+
+#tree:focus-within, #files:focus-within, #queue:focus-within {
+    border: round $accent;
+}
+
+#status {
+    height: 1;
+    padding: 0 1;
+    background: $panel;
+    color: $text;
+}
+
+/* ---- modals ---- */
+
+HelpScreen, DetailScreen, ConfirmScreen, PromptScreen {
+    align: center middle;
+    background: $surface 60%;
+}
+
+#help-box, #detail-box, #confirm-box, #prompt-box {
+    background: $panel;
+    border: round $accent;
+    padding: 1 2;
+    width: 70;
+    max-width: 90%;
+    height: auto;
+    max-height: 80%;
+}
+
+#help-title, #confirm-title {
+    padding-bottom: 1;
+}
+
+#help-note, #confirm-meta {
+    padding-top: 1;
+}
+
+/* The box is a fixed share of the screen and the table takes what is left,
+   so the Convert/Cancel buttons are never pushed off the bottom. */
+#confirm-box {
+    height: 80%;
+}
+
+#confirm-table {
+    height: 1fr;
+    min-height: 3;
+}
+
+#confirm-buttons {
+    height: auto;
+    padding-top: 1;
+    align-horizontal: right;
+}
+
+#confirm-buttons Button {
+    margin-left: 2;
+}
+
+#prompt-box {
+    width: 60;
+}
+
+#prompt-label {
+    padding-bottom: 1;
+}

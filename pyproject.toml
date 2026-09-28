@@ -1,0 +1,71 @@
+[project]
+name = "convtui"
+version = "0.1.0"
+description = "A terminal UI for converting files between formats, one at a time or a whole folder."
+readme = "README.md"
+license = "MIT"
+authors = [
+    { name = "Martin Ellegård", email = "martin.ellegard@gmail.com" }
+]
+keywords = ["tui", "markdown", "converter", "markitdown", "textual", "batch"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Programming Language :: Python :: 3",
+    "Topic :: Text Processing :: Markup :: Markdown",
+    "Topic :: Utilities",
+]
+# Upper bound inherited from markitdown, which declares >=3.10,<3.15.
+requires-python = ">=3.10,<3.15"
+dependencies = [
+    "textual>=8.2",
+    "typer>=0.27",
+    "platformdirs>=4",
+    "tomli-w>=1.0",
+    "markitdown[docx,pdf,pptx,xlsx,xls]>=0.1.8,<0.2",
+    "tomli>=2.0; python_version < '3.11'",
+]
+
+[project.optional-dependencies]
+audio = ["markitdown[audio-transcription]>=0.1.8,<0.2"]
+web = ["markitdown[youtube-transcription]>=0.1.8,<0.2"]
+azure = ["markitdown[az-doc-intel]>=0.1.8,<0.2"]
+outlook = ["markitdown[outlook]>=0.1.8,<0.2"]
+all = ["convtui[audio,web,azure,outlook]"]
+
+[project.urls]
+Homepage = "https://github.com/cg-homelab/ConversionTUI"
+Issues = "https://github.com/cg-homelab/ConversionTUI/issues"
+
+[project.scripts]
+convtui = "convtui.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.12.10,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14",
+    "pytest>=8",
+    "pytest-textual-snapshot>=1.1",
+    "textual-dev>=1.7",
+    "pytest-asyncio>=1.4.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+# OOXML boilerplate: the namespace URIs cannot be wrapped.
+"scripts/make_fixtures.py" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+asyncio_mode = "auto"

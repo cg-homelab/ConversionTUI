@@ -62,3 +62,9 @@ profile.json.gz
 .codex/skills/*
 !.codex/skills/load-github-action-thread/
 !.codex/skills/load-github-action-thread/**
+
+# convtui
+.venv/
+dist/
+.pytest_cache/
+.ruff_cache/
